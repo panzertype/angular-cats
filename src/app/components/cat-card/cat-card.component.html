@@ -6,7 +6,10 @@
   <img
     mat-card-image
     class="cat-card__image"
-    [src]="getImage(cat.reference_image_id)"
+    [src]="
+      (cat.reference_image_id | asyncImage | async)?.url ||
+      '../../../assets/images/no_image.jpg'
+    "
     alt="Photo of a cat"
   />
   <mat-card-content>

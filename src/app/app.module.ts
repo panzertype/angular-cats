@@ -18,12 +18,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
+import { AsyncImagePipe } from './pipes/async-image.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     CatCardComponent,
     HeaderComponent,
+    AsyncImagePipe,
   ],
   imports: [
     BrowserModule,

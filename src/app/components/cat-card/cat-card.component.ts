@@ -13,14 +13,6 @@ export class CatCardComponent implements OnInit {
 
   constructor() {}
 
-  getImage(url: string | undefined) {
-    if (typeof url !== 'undefined') {
-      return 'https://cdn2.thecatapi.com/images/' + url + '.jpg';
-    } else {
-      return '../../../assets/images/no_image.jpg';
-    }
-  }
-
   ngOnInit(): void {
     this.temperaments = this.cat.temperament.split(', ');
   }
