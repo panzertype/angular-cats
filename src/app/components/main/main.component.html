@@ -1,6 +1,6 @@
 <section id="main" class="main">
   <div class="container">
-    <h1 class="main__title">Browse cats</h1>
+    <h1 class="mat-typography">Browse cats</h1>
     <div class="cat-filters">
       <form
         [formGroup]="filtersForm"
@@ -16,7 +16,17 @@
     </div>
     <div class="cat-cards">
       <mat-spinner *ngIf="isLoading"></mat-spinner>
-      <p *ngIf="!isLoading && cats.length === 0">No cats found :(</p>
+      <div *ngIf="!isLoading && cats.length === 0">
+        <h2 class="mat-typography" style="margin-bottom: 14px">
+          No cats found :(
+        </h2>
+        <img
+          width="220px"
+          height="220px"
+          src="https://c.tenor.com/2roX3uxz_68AAAAM/cat-space.gif"
+          alt="Cat gif"
+        />
+      </div>
       <app-cat-card *ngFor="let cat of cats" [cat]="cat"></app-cat-card>
     </div>
   </div>
