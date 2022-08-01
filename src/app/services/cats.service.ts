@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ICat, ICatImage } from '../models/interfaces/ICat';
 import { environment } from '../../environments/environment';
 
