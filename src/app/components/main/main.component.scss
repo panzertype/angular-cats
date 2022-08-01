@@ -1,0 +1,11 @@
+.cat-cards {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+
+  app-cat-card {
+    max-width: 470px;
+  }
+}

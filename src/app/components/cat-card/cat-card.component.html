@@ -1,0 +1,24 @@
+<mat-card class="cat-card">
+  <mat-card-header>
+    <mat-card-title>{{ cat?.name }}</mat-card-title>
+    <mat-card-subtitle>{{ cat?.origin }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    class="cat-card__image"
+    [src]="cat?.image?.url"
+    alt="Photo of a cat"
+  />
+  <mat-card-content>
+    <p>{{ cat?.description }}</p>
+    <mat-chip-list aria-label="Temperament tags">
+      <mat-chip
+        *ngFor="let temperament of temperaments; let even = even; let odd = odd"
+        selected
+        color="{{ even ? 'primary' : 'accent' }}"
+      >
+        {{ temperament }}
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card-content>
+</mat-card>
