@@ -32,7 +32,7 @@ export class MainComponent implements OnInit {
           this.cats = res;
         });
     } else {
-      this.catsService.getCats(2).subscribe((res) => {
+      this.catsService.getCats().subscribe((res) => {
         this.isLoading = false;
         this.noPagination = false;
         this.cats = res.body;
@@ -41,8 +41,25 @@ export class MainComponent implements OnInit {
     }
   }
 
+  OnPageChange(event: any) {
+    this.catsService
+      .getCats(event.pageSize, event.pageIndex)
+      .subscribe((res) => {
+        this.isLoading = false;
+        this.noPagination = false;
+        this.cats = res.body;
+        this.paginatorLength = res.headers.get('pagination-count');
+
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      });
+  }
+
   ngOnInit(): void {
-    this.catsService.getCats(2).subscribe((res) => {
+    this.catsService.getCats().subscribe((res) => {
       this.isLoading = false;
       this.noPagination = false;
       this.cats = res.body;

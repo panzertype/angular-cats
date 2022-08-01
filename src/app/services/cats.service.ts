@@ -19,9 +19,9 @@ export class CatsService {
     );
   }
 
-  getCats(limit: number = 1): Observable<any> {
+  getCats(limit: number = 10, page: number = 0): Observable<any> {
     return this.http.get<any>(
-      `https://api.thecatapi.com/v1/breeds?limit=${limit}`,
+      `https://api.thecatapi.com/v1/breeds?limit=${limit}&page=${page}`,
       { headers: { 'x-api-key': environment.catApiKey }, observe: 'response' }
     );
   }

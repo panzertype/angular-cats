@@ -37,6 +37,7 @@
     [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25, 50]"
     aria-label="Select page"
+    (page)="OnPageChange($event)"
   >
   </mat-paginator>
 </section>
