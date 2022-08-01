@@ -2,21 +2,26 @@
   <div class="container">
     <h1 class="main__title">Browse cats</h1>
     <div class="cat-filters">
-      <form class="cat-filters__breed">
+      <form
+        [formGroup]="filtersForm"
+        (ngSubmit)="filterCats()"
+        class="cat-filters__form"
+      >
         <mat-form-field class="form-full-width" appearance="fill">
           <mat-label>Search by breed</mat-label>
-          <input matInput placeholder="Abyssinian" value="" />
+          <input matInput placeholder="Abyssinian" formControlName="breed" />
         </mat-form-field>
         <button mat-flat-button color="accent">Apply filters</button>
       </form>
     </div>
     <div class="cat-cards">
       <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <p *ngIf="!isLoading && cats.length === 0">No cats found :(</p>
       <app-cat-card *ngFor="let cat of cats" [cat]="cat"></app-cat-card>
     </div>
   </div>
   <mat-paginator
-    *ngIf="!isLoading"
+    *ngIf="!isLoading && !noPagination"
     [length]="paginatorLength"
     [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25, 50]"

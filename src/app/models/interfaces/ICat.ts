@@ -47,6 +47,6 @@ export interface ICat {
   short_legs: number;
   wikipedia_url: string;
   hypoallergenic: number;
-  reference_image_id: string;
-  image: Image;
+  reference_image_id?: string;
+  image?: Image;
 }

@@ -12,8 +12,15 @@ export class CatsService {
 
   cats: ICat[] = [];
 
+  getFilteredCats(query: string): Observable<any> {
+    return this.http.get<ICat[]>(
+      `https://api.thecatapi.com/v1/breeds/search?q=${query}`,
+      { headers: { 'x-api-key': environment.catApiKey } }
+    );
+  }
+
   getCats(limit: number = 1): Observable<any> {
-    return this.http.get<ICat[] | any>(
+    return this.http.get<any>(
       `https://api.thecatapi.com/v1/breeds?limit=${limit}`,
       { headers: { 'x-api-key': environment.catApiKey }, observe: 'response' }
     );
