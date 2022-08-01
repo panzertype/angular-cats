@@ -12,10 +12,10 @@ export class CatsService {
 
   cats: ICat[] = [];
 
-  getCats(limit: number = 1): Observable<ICat[]> {
-    return this.http.get<ICat[]>(
+  getCats(limit: number = 1): Observable<any> {
+    return this.http.get<ICat[] | any>(
       `https://api.thecatapi.com/v1/breeds?limit=${limit}`,
-      { headers: { 'x-api-key': environment.catApiKey } }
+      { headers: { 'x-api-key': environment.catApiKey }, observe: 'response' }
     );
   }
 }

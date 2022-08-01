@@ -1,4 +1,10 @@
+@import "../../styles/scss/variables";
+
 .cat-card__image {
   height: 470px;
   object-fit: cover;
+
+  @media screen and (max-width: $screen-sm) {
+    height: auto;
+  }
 }

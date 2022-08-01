@@ -1,4 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./app/styles/scss/variables";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width: $screen-sm) {
+    max-width: 540px;
+  }
+
+  @media (min-width: $screen-md) {
+    max-width: 720px;
+  }
+
+  @media (min-width: $screen-lg) {
+    max-width: 960px;
+  }
+
+  @media (min-width: $screen-xl) {
+    max-width: 1140px;
+  }
+
+  @media (min-width: $screen-xxl) {
+    max-width: 1320px;
+  }
+}
+
+.form-full-width {
+  width: 100%;
+}

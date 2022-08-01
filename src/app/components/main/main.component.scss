@@ -1,11 +1,23 @@
-.cat-cards {
-  display: flex;
-  justify-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px;
+#main {
+  padding-top: 28px;
 
-  app-cat-card {
-    max-width: 470px;
+  .cat-filters {
+    &__breed {
+      max-width: 275px;
+      width: 100%;
+    }
+  }
+
+  .cat-cards {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-top: 14px;
+
+    app-cat-card {
+      max-width: 470px;
+    }
   }
 }

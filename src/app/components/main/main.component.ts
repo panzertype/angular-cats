@@ -1,6 +1,5 @@
 import { CatsService } from './../../services/cats.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ICat } from 'src/app/models/interfaces/ICat';
 
 @Component({
@@ -9,11 +8,18 @@ import { ICat } from 'src/app/models/interfaces/ICat';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  cats$!: Observable<ICat[]>;
+  cats: ICat[] = [];
+  isLoading: boolean = true;
+  paginatorLength: number = 0;
 
   constructor(private catsService: CatsService) {}
 
   ngOnInit(): void {
-    this.cats$ = this.catsService.getCats(2);
+    this.catsService.getCats(2).subscribe((res) => {
+      console.log(res);
+      this.isLoading = false;
+      this.cats = res.body;
+      this.paginatorLength = res.headers.get('pagination-count');
+    });
   }
 }
