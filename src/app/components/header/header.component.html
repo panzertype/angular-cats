@@ -3,6 +3,8 @@
   <span>Angular Cats</span>
   <span class="spacer"></span>
   <mat-slide-toggle (click)="toggleDarkMode()" [(ngModel)]="isDarkMode"
-    >Dark mode</mat-slide-toggle
+    ><mat-icon>{{
+      isDarkMode ? "nightlight_round" : "wb_sunny"
+    }}</mat-icon></mat-slide-toggle
   >
 </mat-toolbar>
