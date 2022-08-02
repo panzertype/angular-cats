@@ -7,12 +7,25 @@
         (ngSubmit)="filterCats()"
         class="cat-filters__form"
       >
-        <mat-form-field class="form-full-width" appearance="fill">
+        <mat-form-field
+          class="form-full-width cat-filters__input"
+          appearance="fill"
+        >
           <mat-label>Search by breed</mat-label>
           <input matInput placeholder="Abyssinian" formControlName="breed" />
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-        <button mat-flat-button color="accent">Apply filters</button>
+        <mat-form-field
+          class="form-full-width cat-filters__input"
+          appearance="fill"
+        >
+          <mat-label>List length</mat-label>
+          <input matInput type="number" formControlName="pageSize" />
+          <mat-icon matSuffix>list_alt</mat-icon>
+        </mat-form-field>
+        <button mat-flat-button color="accent" class="cat-filters__button">
+          Apply filters
+        </button>
       </form>
     </div>
     <div class="cat-cards">
@@ -28,13 +41,17 @@
           alt="Cat gif"
         />
       </div>
-      <app-cat-card *ngFor="let cat of cats" [cat]="cat"></app-cat-card>
+      <app-cat-card
+        *ngFor="let cat of cats; let i = index"
+        [cat]="cat"
+        [index]="i"
+      ></app-cat-card>
     </div>
   </div>
   <mat-paginator
     *ngIf="!isLoading && !noPagination"
     [length]="paginatorLength"
-    [pageSize]="10"
+    [pageSize]="paginatorSize"
     [pageSizeOptions]="[5, 10, 25, 50]"
     aria-label="Select page"
     (page)="OnPageChange($event)"

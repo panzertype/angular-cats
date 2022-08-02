@@ -3,8 +3,18 @@
 
   .cat-filters {
     &__form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+
+      & button {
+        max-height: 52px;
+        min-width: 107px;
+      }
+    }
+
+    &__input {
       max-width: 275px;
-      width: 100%;
     }
   }
 

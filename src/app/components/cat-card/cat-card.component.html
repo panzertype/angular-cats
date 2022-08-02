@@ -1,5 +1,8 @@
 <mat-card class="cat-card">
   <mat-card-header>
+    <div mat-card-avatar class="bg-primary color-accent cat-card__number">
+      {{ index + 1 }}
+    </div>
     <mat-card-title>{{ cat.name }}</mat-card-title>
     <mat-card-subtitle>{{ cat.origin }}</mat-card-subtitle>
   </mat-card-header>

@@ -1,10 +1,20 @@
 @import "../../styles/scss/variables";
 
-.cat-card__image {
-  height: 470px;
-  object-fit: cover;
+.cat-card {
+  &__number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+    font-weight: 500;
+  }
 
-  @media screen and (max-width: $screen-sm) {
-    height: auto;
+  &__image {
+    height: 470px;
+    object-fit: cover;
+
+    @media screen and (max-width: $screen-sm) {
+      height: auto;
+    }
   }
 }

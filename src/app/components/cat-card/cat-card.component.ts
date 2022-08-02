@@ -8,6 +8,7 @@ import { ICat } from 'src/app/models/interfaces/ICat';
 })
 export class CatCardComponent implements OnInit {
   @Input() cat!: ICat;
+  @Input() index!: number;
 
   temperaments: string[] = [];
 

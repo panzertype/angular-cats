@@ -12,12 +12,15 @@ export class MainComponent implements OnInit {
   cats: ICat[] = [];
   isLoading: boolean = true;
   paginatorLength: number = 0;
+  defaultPaginatorSize: number = 10;
+  paginatorSize: number = this.defaultPaginatorSize;
   noPagination: boolean = false;
 
   constructor(private catsService: CatsService) {}
 
   filtersForm = new FormGroup({
     breed: new FormControl(''),
+    pageSize: new FormControl(this.paginatorSize),
   });
 
   filterCats() {
@@ -31,6 +34,14 @@ export class MainComponent implements OnInit {
           this.noPagination = true;
           this.cats = res;
         });
+    } else if (this.filtersForm.value.pageSize !== this.defaultPaginatorSize) {
+      this.paginatorSize = this.filtersForm.value.pageSize as number;
+      this.catsService.getCats(this.paginatorSize).subscribe((res) => {
+        this.isLoading = false;
+        this.noPagination = false;
+        this.cats = res.body;
+        this.paginatorLength = res.headers.get('pagination-count');
+      });
     } else {
       this.catsService.getCats().subscribe((res) => {
         this.isLoading = false;
