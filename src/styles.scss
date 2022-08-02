@@ -22,13 +22,13 @@ $angular-default-theme: mat.define-light-theme(
 
 @include mat.all-component-themes($angular-default-theme);
 
-$angular-dark-primary: mat.define-palette(
+$angular-dark-primary: mat.define-palette(mat.$brown-palette, 400, 200, 100);
+$angular-dark-accent: mat.define-palette(
   mat.$light-blue-palette,
-  500,
+  300,
   100,
-  900
+  500
 );
-$angular-dark-accent: mat.define-palette(mat.$brown-palette, 300, 100, 500);
 
 $angular-dark-warn: mat.define-palette(mat.$red-palette);
 
@@ -48,11 +48,11 @@ $angular-dark-theme: mat.define-dark-theme(
   background-color: #272727;
   color: whitesmoke;
 
-  $primary-color: #03a9f4;
-  $secondary-color: #795548;
+  $primary-color: #8d6e63;
+  $secondary-color: #03a9f4;
 
   & a {
-    color: $primary-color;
+    color: $secondary-color;
   }
 
   .bg-primary {
