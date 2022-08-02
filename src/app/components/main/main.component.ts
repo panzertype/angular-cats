@@ -2,6 +2,10 @@ import { CatsService } from './../../services/cats.service';
 import { Component, OnInit } from '@angular/core';
 import { ICat } from 'src/app/models/interfaces/ICat';
 import { FormGroup, FormControl } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
+import * as PaginatorActions from '../../store/paginator/paginator.actions';
+import { Observable } from 'rxjs';
+import { paginatorSelector } from 'src/app/store/paginator/paginator.selectors';
 
 @Component({
   selector: 'app-main',
@@ -15,8 +19,11 @@ export class MainComponent implements OnInit {
   defaultPaginatorSize: number = 10;
   paginatorSize: number = this.defaultPaginatorSize;
   noPagination: boolean = false;
+  paginator$: Observable<any>;
 
-  constructor(private catsService: CatsService) {}
+  constructor(private catsService: CatsService, private store: Store) {
+    this.paginator$ = this.store.pipe(select(paginatorSelector));
+  }
 
   filtersForm = new FormGroup({
     breed: new FormControl(''),
@@ -52,7 +59,21 @@ export class MainComponent implements OnInit {
     }
   }
 
+  test() {
+    this.store.dispatch(
+      PaginatorActions.update({
+        paginator: {
+          previousPageIndex: 0,
+          pageIndex: 1,
+          pageSize: 10,
+          length: 0,
+        },
+      })
+    );
+  }
+
   OnPageChange(event: any) {
+    console.log(event);
     this.catsService
       .getCats(event.pageSize, event.pageIndex)
       .subscribe((res) => {
