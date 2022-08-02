@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AsyncImagePipe } from './pipes/async-image.pipe';
 
@@ -42,6 +43,7 @@ import { AsyncImagePipe } from './pipes/async-image.pipe';
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

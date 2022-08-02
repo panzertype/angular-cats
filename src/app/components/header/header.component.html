@@ -1,4 +1,8 @@
 <mat-toolbar color="primary">
   <mat-icon class="logo-icon" aria-hidden="false">pets</mat-icon>
   <span>Angular Cats</span>
+  <span class="spacer"></span>
+  <mat-slide-toggle (click)="toggleDarkMode()" [(ngModel)]="isDarkMode"
+    >Dark mode</mat-slide-toggle
+  >
 </mat-toolbar>

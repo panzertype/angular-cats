@@ -1,5 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+@import "~@angular/material/theming";
 @import "./app/styles/scss/variables";
+
+@include mat.core();
+
+$angular-primary: mat.define-palette(mat.$deep-purple-palette, 500, 100, 900);
+$angular-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+
+$angular-warn: mat.define-palette(mat.$red-palette);
+
+$angular-default-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $angular-primary,
+      accent: $angular-accent,
+      warn: $angular-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($angular-default-theme);
+
+$angular-dark-primary: mat.define-palette(mat.$blue-palette, 500, 100, 900);
+$angular-dark-accent: mat.define-palette(mat.$green-palette, A200, A100, A400);
+
+$angular-dark-warn: mat.define-palette(mat.$red-palette);
+
+$angular-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $angular-dark-primary,
+      accent: $angular-dark-accent,
+      warn: $angular-dark-warn,
+    ),
+  )
+);
+
+.dark-mode {
+  @include mat.all-component-colors($angular-dark-theme);
+
+  background-color: #272727;
+  color: whitesmoke;
+
+  & a {
+    color: #69f0ae;
+  }
+}
 
 html,
 body {
@@ -53,4 +100,22 @@ body {
 
 .color-primary {
   color: #673ab7;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
