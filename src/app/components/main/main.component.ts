@@ -31,8 +31,20 @@ export class MainComponent implements OnInit {
     pageSize: new FormControl(this.paginatorSize),
   });
 
+  setPaginatorState(paginator: IPaginator) {
+    this.store.dispatch(
+      PaginatorActions.update({
+        paginator,
+      })
+    );
+  }
+
   filterCats() {
     if (this.filtersForm.value.breed) {
+      this.paginatorIndex = 0;
+      this.setPaginatorState({
+        pageIndex: this.paginatorIndex,
+      });
       this.cats = [];
       this.isLoading = true;
       this.catsService
@@ -59,14 +71,6 @@ export class MainComponent implements OnInit {
     }
   }
 
-  setPaginatorState(paginator: IPaginator) {
-    this.store.dispatch(
-      PaginatorActions.update({
-        paginator,
-      })
-    );
-  }
-
   OnPageChange(event: any) {
     this.catsService
       .getCats(event.pageSize, event.pageIndex)
@@ -74,8 +78,13 @@ export class MainComponent implements OnInit {
         this.isLoading = false;
         this.noPagination = false;
         this.cats = res.body;
-        this.setPaginatorState(event);
         this.paginatorLength = res.headers.get('pagination-count');
+        this.setPaginatorState({
+          previousPageIndex: event.previousPageIndex,
+          pageSize: event.pageSize,
+          pageIndex: event.pageIndex,
+          length: this.paginatorLength,
+        });
 
         window.scroll({
           top: 0,
