@@ -1,7 +1,10 @@
 <mat-card class="cat-card">
   <mat-card-header>
     <div mat-card-avatar class="bg-primary color-accent cat-card__number">
-      {{ index + 1 }}
+      <ng-container *ngIf="paginator$ | async as p; else default">{{
+        p.pageIndex * p.pageSize + index + 1
+      }}</ng-container>
+      <ng-template #default>{{ index + 1 }}</ng-template>
     </div>
     <mat-card-title>{{ cat.name }}</mat-card-title>
     <mat-card-subtitle>{{ cat.origin }}</mat-card-subtitle>

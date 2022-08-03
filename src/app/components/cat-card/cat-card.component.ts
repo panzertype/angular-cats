@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICat } from 'src/app/models/interfaces/ICat';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { ICat } from '../../models/interfaces/ICat';
+import { paginatorSelector } from '../../store/paginator/paginator.selectors';
 
 @Component({
   selector: 'app-cat-card',
@@ -11,8 +14,11 @@ export class CatCardComponent implements OnInit {
   @Input() index!: number;
 
   temperaments: string[] = [];
+  paginator$: Observable<any>;
 
-  constructor() {}
+  constructor(private store: Store) {
+    this.paginator$ = this.store.pipe(select(paginatorSelector));
+  }
 
   ngOnInit(): void {
     this.temperaments = this.cat.temperament.split(', ');

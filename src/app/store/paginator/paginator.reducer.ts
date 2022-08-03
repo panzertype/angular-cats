@@ -1,7 +1,8 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, State } from '@ngrx/store';
+import { IPaginator } from '../../models/interfaces/IPaginator';
 import { update } from './paginator.actions';
 
-export const initialState = {
+export const initialState: IPaginator = {
   previousPageIndex: 0,
   pageIndex: 0,
   pageSize: 10,
@@ -10,9 +11,5 @@ export const initialState = {
 
 export const paginatorReducer = createReducer(
   initialState,
-  on(update, (state, { paginator }) => {
-    console.log(state);
-    console.log(paginator);
-    return paginator;
-  })
+  on(update, (state, { paginator }) => ({ ...state, ...paginator }))
 );

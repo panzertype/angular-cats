@@ -1,6 +1,6 @@
 export interface IPaginator {
-  previousPageIndex: number;
-  pageIndex: number;
-  pageSize: number;
-  length: number;
+  previousPageIndex?: number;
+  pageIndex?: number;
+  pageSize?: number;
+  length?: number;
 }

@@ -1,11 +1,12 @@
 import { CatsService } from './../../services/cats.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ICat } from 'src/app/models/interfaces/ICat';
 import { FormGroup, FormControl } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import * as PaginatorActions from '../../store/paginator/paginator.actions';
 import { Observable } from 'rxjs';
-import { paginatorSelector } from 'src/app/store/paginator/paginator.selectors';
+import { paginatorSelector } from '../../store/paginator/paginator.selectors';
+import { IPaginator } from 'src/app/models/interfaces/IPaginator';
 
 @Component({
   selector: 'app-main',
@@ -16,8 +17,8 @@ export class MainComponent implements OnInit {
   cats: ICat[] = [];
   isLoading: boolean = true;
   paginatorLength: number = 0;
-  defaultPaginatorSize: number = 10;
-  paginatorSize: number = this.defaultPaginatorSize;
+  paginatorSize: number = 10;
+  paginatorIndex: number = 0;
   noPagination: boolean = false;
   paginator$: Observable<any>;
 
@@ -41,16 +42,15 @@ export class MainComponent implements OnInit {
           this.noPagination = true;
           this.cats = res;
         });
-    } else if (this.filtersForm.value.pageSize !== this.defaultPaginatorSize) {
-      this.paginatorSize = this.filtersForm.value.pageSize as number;
-      this.catsService.getCats(this.paginatorSize).subscribe((res) => {
-        this.isLoading = false;
-        this.noPagination = false;
-        this.cats = res.body;
-        this.paginatorLength = res.headers.get('pagination-count');
-      });
     } else {
-      this.catsService.getCats().subscribe((res) => {
+      this.paginatorIndex = 0;
+      this.paginatorSize = this.filtersForm.value.pageSize as number;
+
+      this.setPaginatorState({
+        pageSize: this.paginatorSize,
+        pageIndex: this.paginatorIndex,
+      });
+      this.catsService.getCats(this.paginatorSize).subscribe((res) => {
         this.isLoading = false;
         this.noPagination = false;
         this.cats = res.body;
@@ -59,27 +59,22 @@ export class MainComponent implements OnInit {
     }
   }
 
-  test() {
+  setPaginatorState(paginator: IPaginator) {
     this.store.dispatch(
       PaginatorActions.update({
-        paginator: {
-          previousPageIndex: 0,
-          pageIndex: 1,
-          pageSize: 10,
-          length: 0,
-        },
+        paginator,
       })
     );
   }
 
   OnPageChange(event: any) {
-    console.log(event);
     this.catsService
       .getCats(event.pageSize, event.pageIndex)
       .subscribe((res) => {
         this.isLoading = false;
         this.noPagination = false;
         this.cats = res.body;
+        this.setPaginatorState(event);
         this.paginatorLength = res.headers.get('pagination-count');
 
         window.scroll({
